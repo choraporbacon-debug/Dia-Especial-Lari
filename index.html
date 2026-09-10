@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff174f">
+  <title>HeartSpace ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       TELA INICIAL
+  ========================== -->
+  <section id="startScreen" class="screen start-screen">
+    <div class="hearts" id="hearts"></div>
+
+    <div class="start-content">
+      <div class="logo-heart">♥</div>
+
+      <h1>HeartSpace</h1>
+
+      <p class="subtitle">
+        Crie um cantinho especial para guardar<br>
+        momentos que significam muito. ❤️
+      </p>
+
+      <button class="primary-button" type="button" onclick="startCreator()">
+        ✨ COMEÇAR A PREPARAR
+      </button>
+
+      <p class="small-text">
+        Feito com carinho para alguém especial.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- =========================
+       CRIADOR
+  ========================== -->
+  <section id="creatorScreen" class="screen creator-screen hidden">
+
+    <header class="creator-header">
+      <button class="back-button" type="button" onclick="backToStart()">
+        ←
+      </button>
+
+      <div>
+        <strong>HeartSpace</strong>
+        <span>Seu espaço especial</span>
+      </div>
+    </header>
+
+    <div class="progress-container">
+      <div class="progress-info">
+        <span>Preparando seu espaço</span>
+        <span id="stepCounter">1 / 5</span>
+      </div>
+
+      <div class="progress-bar">
+        <div id="progressBar"></div>
+      </div>
+    </div>
+
+
+    <!-- ETAPA 1 -->
+    <div class="creator-step active" data-step="1">
+
+      <div class="step-icon">💌</div>
+
+      <h2>Quem faz parte dessa história?</h2>
+
+      <p class="step-description">
+        Comece colocando os nomes de vocês.
+      </p>
+
+      <label for="yourName">Seu nome</label>
+      <input
+        id="yourName"
+        type="text"
+        placeholder="Digite seu nome"
+        maxlength="40"
+      >
+
+      <label for="partnerName">Nome da pessoa especial</label>
+      <input
+        id="partnerName"
+        type="text"
+        placeholder="Digite o nome dela"
+        value="Lawryn"
+        maxlength="40"
+      >
+
+      <label for="nickname">Apelido carinhoso</label>
+      <input
+        id="nickname"
+        type="text"
+        placeholder="Ex.: meu amor, princesa..."
+        maxlength="50"
+      >
+
+      <button class="next-button" type="button" onclick="nextStep()">
+        Continuar →
+      </button>
+    </div>
+
+
+    <!-- ETAPA 2 -->
+    <div class="creator-step" data-step="2">
+
+      <div class="step-icon">💖</div>
+
+      <h2>Escreva uma mensagem</h2>
+
+      <p class="step-description">
+        Coloque algumas palavras que tenham significado para vocês.
+      </p>
+
+      <label for="messageTitle">Título</label>
+      <input
+        id="messageTitle"
+        type="text"
+        value="Para você, com todo meu carinho ❤️"
+        maxlength="80"
+      >
+
+      <label for="mainMessage">Sua mensagem</label>
+      <textarea
+        id="mainMessage"
+        rows="7"
+        placeholder="Escreva aqui sua mensagem..."
+        maxlength="1500"
+      ></textarea>
+
+      <div class="counter-text">
+        <span id="messageCount">0</span>/1500
+      </div>
+
+      <label for="signature">Assinatura</label>
+      <input
+        id="signature"
+        type="text"
+        placeholder="Ex.: Com amor, Lucas ❤️"
+        maxlength="80"
+      >
+
+      <div class="step-buttons">
+        <button class="secondary-button" type="button" onclick="previousStep()">
+          ← Voltar
+        </button>
+
+        <button class="next-button" type="button" onclick="nextStep()">
+          Continuar →
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ETAPA 3 -->
+    <div class="creator-step" data-step="3">
+
+      <div class="step-icon">📸</div>
+
+      <h2>Adicione suas fotos</h2>
+
+      <p class="step-description">
+        Você pode escolher até 9 fotos para sua galeria.
+      </p>
+
+      <label class="upload-box" for="photoInput">
+        <span class="upload-icon">＋</span>
+        <strong>Escolher fotos</strong>
+        <small>Até 9 imagens</small>
+      </label>
+
+      <input
+        id="photoInput"
+        type="file"
+        accept="image/*"
+        multiple
+        hidden
+      >
+
+      <div id="photoPreview" class="photo-preview"></div>
+
+      <div class="puzzle-upload">
+        <h3>🧩 Foto do quebra-cabeça</h3>
+
+        <p>
+          Escolha uma foto para transformar em um quebra-cabeça de 9 peças.
+        </p>
+
+        <label class="upload-box small-upload" for="puzzleInput">
+          <span class="upload-icon">🧩</span>
+          <strong>Escolher foto</strong>
+          <small>1 imagem</small>
+        </label>
+
+        <input
+          id="puzzleInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+        <div id="puzzlePreview" class="single-preview"></div>
+      </div>
+
+      <div class="step-buttons">
+        <button class="secondary-button" type="button" onclick="previousStep()">
+          ← Voltar
+        </button>
+
+        <button class="next-button" type="button" onclick="nextStep()">
+          Continuar →
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ETAPA 4 -->
+    <div class="creator-step" data-step="4">
+
+      <div class="step-icon">🎵</div>
+
+      <h2>Escolha uma música</h2>
+
+      <p class="step-description">
+        Coloque uma música especial para tocar no seu espaço.
+      </p>
+
+      <label for="musicName">Nome da música</label>
+      <input
+        id="musicName"
+        type="text"
+        value="Nossa música"
+        maxlength="80"
+      >
+
+      <label for="musicArtist">Artista</label>
+      <input
+        id="musicArtist"
+        type="text"
+        value="Música especial"
+        maxlength="80"
+      >
+
+      <label for="musicUrl">
+        URL direta do arquivo de áudio
+      </label>
+
+      <input
+        id="musicUrl"
+        type="url"
+        placeholder="https://exemplo.com/musica.mp3"
+      >
+
+      <div class="or-divider">
+        <span>OU</span>
+      </div>
+
+      <label class="upload-box small-upload" for="musicFile">
+        <span class="upload-icon">🎧</span>
+        <strong>Escolher áudio do aparelho</strong>
+        <small>MP3, WAV, OGG...</small>
+      </label>
+
+      <input
+        id="musicFile"
+        type="file"
+        accept="audio/*"
+        hidden
+      >
+
+      <p id="musicFileName" class="file-name"></p>
+
+      <div class="step-buttons">
+        <button class="secondary-button" type="button" onclick="previousStep()">
+          ← Voltar
+        </button>
+
+        <button class="next-button" type="button" onclick="nextStep()">
+          Continuar →
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ETAPA 5 -->
+    <div class="creator-step" data-step="5">
+
+      <div class="step-icon">✨</div>
+
+      <h2>Deixe tudo com a cara de vocês</h2>
+
+      <p class="step-description">
+        Escolha o tema, a data e prepare uma surpresa.
+      </p>
+
+      <label>Tema</label>
+
+      <div class="theme-grid">
+
+        <button
+          type="button"
+          class="theme-option selected"
+          data-theme="red"
+          onclick="chooseTheme('red')"
+        >
+          ❤️
+          <span>Vermelho</span>
+        </button>
+
+        <button
+          type="button"
+          class="theme-option"
+          data-theme="pink"
+          onclick="chooseTheme('pink')"
+        >
+          💗
+          <span>Rosa</span>
+        </button>
+
+        <button
+          type="button"
+          class="theme-option"
+          data-theme="purple"
+          onclick="chooseTheme('purple')"
+        >
+          💜
+          <span>Roxo</span>
+        </button>
+
+        <button
+          type="button"
+          class="theme-option"
+          data-theme="blue"
+          onclick="chooseTheme('blue')"
+        >
+          💙
+          <span>Azul</span>
+        </button>
+
+        <button
+          type="button"
+          class="theme-option"
+          data-theme="gold"
+          onclick="chooseTheme('gold')"
+        >
+          💛
+          <span>Dourado</span>
+        </button>
+
+      </div>
+
+      <label for="startDate">
+        Data especial
+      </label>
+
+      <input
+        id="startDate"
+        type="date"
+      >
+
+      <label for="surpriseText">
+        Mensagem surpresa
+      </label>
+
+      <textarea
+        id="surpriseText"
+        rows="5"
+        maxlength="600"
+        placeholder="Escreva algo especial para aparecer no final..."
+      >Você é uma pessoa muito especial para mim. ❤️</textarea>
+
+      <div class="step-buttons">
+        <button class="secondary-button" type="button" onclick="previousStep()">
+          ← Voltar
+        </button>
+
+        <button class="create-button" type="button" onclick="createPage()">
+          💖 CRIAR MEU ESPAÇO
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PÁGINA FINAL
+  ========================== -->
+  <section id="finalScreen" class="screen final-screen hidden">
+
+    <header class="final-header">
+
+      <div class="mini-logo">
+        ♥ HeartSpace
+      </div>
+
+      <div class="header-actions">
+        <button type="button" onclick="openShare()">
+          🔗 Compartilhar
+        </button>
+
+        <button type="button" onclick="backToCreator()">
+          ✏️ Editar
+        </button>
+      </div>
+
+    </header>
+
+
+    <main class="love-page">
+
+      <!-- HERO -->
+      <section class="love-hero">
+
+        <div class="floating-heart">♥</div>
+
+        <p class="tiny-label">
+          UM CANTINHO ESPECIAL PARA
+        </p>
+
+        <h1 id="finalNames">
+          Você & Lawryn
+        </h1>
+
+        <p id="finalNickname" class="nickname"></p>
+
+        <div class="hero-line"></div>
+
+      </section>
+
+
+      <!-- CONTADOR -->
+      <section class="counter-card">
+
+        <p class="section-label">
+          ⏳ DESDE O NOSSO MOMENTO ESPECIAL
+        </p>
+
+        <div class="counter-grid">
+
+          <div class="counter-item">
+            <strong id="years">0</strong>
+            <span>anos</span>
+          </div>
+
+          <div class="counter-item">
+            <strong id="days">0</strong>
+            <span>dias</span>
+          </div>
+
+          <div class="counter-item">
+            <strong id="hours">0</strong>
+            <span>horas</span>
+          </div>
+
+          <div class="counter-item">
+            <strong id="minutes">0</strong>
+            <span>minutos</span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- MENSAGEM -->
+      <section class="message-card">
+
+        <p class="section-label">
+          💌 UMA MENSAGEM
+        </p>
+
+        <h2 id="finalMessageTitle">
+          Para você, com todo meu carinho ❤️
+        </h2>
+
+        <p id="finalMessage">
+          Minha mensagem especial.
+        </p>
+
+        <div class="signature" id="finalSignature"></div>
+
+      </section>
+
+
+      <!-- GALERIA -->
+      <section id="gallerySection" class="content-section">
+
+        <div class="section-heading">
+          <span>📸</span>
+
+          <div>
+            <p class="section-label">NOSSOS MOMENTOS</p>
+            <h2>Memórias especiais</h2>
+          </div>
+        </div>
+
+        <div id="gallery" class="gallery"></div>
+
+      </section>
+
+
+      <!-- PUZZLE -->
+      <section id="puzzleSection" class="content-section">
+
+        <div class="section-heading">
+          <span>🧩</span>
+
+          <div>
+            <p class="section-label">UM DESAFIO</p>
+            <h2>Monte a nossa foto</h2>
+          </div>
+        </div>
+
+        <p class="section-description">
+          Clique em duas peças para trocar de lugar e montar a imagem.
+        </p>
+
+        <div id="puzzle" class="puzzle"></div>
+
+        <div class="puzzle-buttons">
+          <button type="button" onclick="shufflePuzzle()">
+            🔀 Embaralhar
+          </button>
+
+          <button type="button" onclick="checkPuzzle()">
+            ✓ Conferir
+          </button>
+
+          <button type="button" onclick="solvePuzzle()">
+            ✨ Resolver
+          </button>
+        </div>
+
+        <p id="puzzleStatus" class="puzzle-status"></p>
+
+      </section>
+
+
+      <!-- MÚSICA -->
+      <section id="musicSection" class="music-card">
+
+        <div class="music-icon">
+          🎵
+        </div>
+
+        <div class="music-info">
+
+          <p class="section-label">
+            NOSSA MÚSICA
+          </p>
+
+          <h3 id="musicTitle">
+            Nossa música
+          </h3>
+
+          <p id="musicArtist">
+            Música especial
+          </p>
+
+        </div>
+
+        <button
+          id="musicButton"
+          class="music-play"
+          type="button"
+          onclick="toggleMusic()"
+        >
+          ▶
+        </button>
+
+      </section>
+
+      <audio id="audioPlayer"></audio>
+
+
+      <!-- SURPRESA -->
+      <section class="surprise-section">
+
+        <div class="surprise-card">
+
+          <div class="surprise-icon">
+            🎁
+          </div>
+
+          <p class="section-label">
+            TEM UMA SURPRESA AQUI
+          </p>
+
+          <h2>Uma última coisinha...</h2>
+
+          <p>
+            Clique no botão para descobrir.
+          </p>
+
+          <button
+            type="button"
+            class="surprise-button"
+            onclick="showSurprise()"
+          >
+            ✨ ABRIR SURPRESA
+          </button>
+
+          <div
+            id="surpriseMessage"
+            class="surprise-message hidden"
+          ></div>
+
+        </div>
+
+      </section>
+
+      <footer>
+        <p>
+          Feito com ❤️ no HeartSpace
+        </p>
+      </footer>
+
+    </main>
+
+  </section>
+
+
+  <!-- =========================
+       MODAL DE COMPARTILHAMENTO
+  ========================== -->
+  <div
+    id="shareModal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <button
+        class="modal-close"
+        type="button"
+        onclick="closeShare()"
+      >
+        ×
+      </button>
+
+      <div class="modal-icon">🔗</div>
+
+      <h2>Compartilhe seu espaço</h2>
+
+      <p>
+        Copie o endereço abaixo para compartilhar.
+      </p>
+
+      <div class="share-input">
+        <input
+          id="shareLink"
+          type="text"
+          readonly
+        >
+
+        <button
+          type="button"
+          onclick="copyShareLink()"
+        >
+          Copiar
+        </button>
+      </div>
+
+      <p class="share-warning">
+        💡 No GitHub Pages, esta versão salva os dados no navegador.
+        Para criar links públicos individuais, será necessário um sistema
+        de armazenamento/backend.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+
+</body>
+  </html>
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+  --bg: #080808;
+  --bg-soft: #0d0d0d;
+  --card: #111111;
+  --card-2: #171717;
+
+  --text: #ffffff;
+  --muted: #a7a7a7;
+
+  --accent: #ff174f;
+  --accent-2: #ff4d73;
+
+  --glow: rgba(255, 23, 79, 0.35);
+
+  --border: rgba(255, 255, 255, 0.09);
+
+  --radius: 22px;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================
+   TELAS
+========================= */
+
+.screen {
+  min-height: 100vh;
+}
+
+.start-screen {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255, 23, 79, 0.12),
+      transparent 35%
+    ),
+    var(--bg);
+}
+
+
+/* =========================
+   CORAÇÕES
+========================= */
+
+.hearts {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart-particle {
+  position: absolute;
+
+  color: var(--accent);
+
+  opacity: 0;
+
+  animation:
+    floatHeart linear forwards;
+
+  filter:
+    drop-shadow(
+      0 0 12px var(--glow)
+    );
+}
+
+@keyframes floatHeart {
+
+  0% {
+    transform:
+      translateY(105vh)
+      rotate(0deg)
+      scale(0.5);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.6;
+  }
+
+  85% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform:
+      translateY(-15vh)
+      rotate(35deg)
+      scale(1.2);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================
+   START
+========================= */
+
+.start-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(92%, 650px);
+
+  text-align: center;
+}
+
+.logo-heart {
+  width: 90px;
+  height: 90px;
+
+  margin: 0 auto 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 46px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  border-radius: 28px;
+
+  box-shadow:
+    0 20px 70px var(--glow);
+}
+
+.start-content h1 {
+  font-size: clamp(42px, 8vw, 76px);
+
+  letter-spacing: -3px;
+
+  margin-bottom: 18px;
+}
+
+.subtitle {
+  color: var(--muted);
+
+  line-height: 1.7;
+
+  font-size: 17px;
+
+  margin-bottom: 35px;
+}
+
+.small-text {
+  margin-top: 18px;
+
+  color: #666;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.primary-button,
+.next-button,
+.create-button {
+  border: 0;
+
+  color: white;
+
+  font-weight: 800;
+
+  border-radius: 14px;
+
+  padding: 16px 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  box-shadow:
+    0 12px 35px var(--glow);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.primary-button:hover,
+.next-button:hover,
+.create-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 18px 45px var(--glow);
+}
+
+.primary-button {
+  min-width: 260px;
+}
+
+
+/* =========================
+   CRIADOR
+========================= */
+
+.creator-screen {
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255, 23, 79, 0.08),
+      transparent 30%
+    ),
+    var(--bg);
+
+  padding-bottom: 50px;
+}
+
+.creator-header {
+  width: min(92%, 900px);
+
+  margin: auto;
+
+  padding: 24px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.creator-header strong {
+  display: block;
+
+  font-size: 20px;
+}
+
+.creator-header span {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.back-button {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid var(--border);
+
+  background: var(--card);
+
+  color: white;
+
+  border-radius: 12px;
+
+  font-size: 20px;
+}
+
+
+/* =========================
+   PROGRESSO
+========================= */
+
+.progress-container {
+  width: min(92%, 900px);
+
+  margin: 15px auto 40px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 5px;
+
+  background: #1b1b1b;
+
+  border-radius: 99px;
+
+  overflow: hidden;
+}
+
+#progressBar {
+  width: 20%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  transition: width 0.3s;
+}
+
+
+/* =========================
+   ETAPAS
+========================= */
+
+.creator-step {
+  width: min(92%, 650px);
+
+  margin: auto;
+
+  display: none;
+
+  animation: fadeIn 0.35s ease;
+}
+
+.creator-step.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-icon {
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 23, 79, 0.1);
+
+  font-size: 30px;
+}
+
+.creator-step h2 {
+  font-size: 30px;
+
+  margin-bottom: 10px;
+}
+
+.step-description {
+  color: var(--muted);
+
+  line-height: 1.6;
+
+  margin-bottom: 30px;
+}
+
+.creator-step label {
+  display: block;
+
+  color: #ddd;
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  margin: 20px 0 8px;
+}
+
+.creator-step input,
+.creator-step textarea {
+  width: 100%;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  padding: 15px;
+
+  background: var(--card);
+
+  color: white;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.creator-step textarea {
+  resize: vertical;
+
+  line-height: 1.6;
+}
+
+.creator-step input:focus,
+.creator-step textarea:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 23, 79, 0.08);
+}
+
+.counter-text {
+  text-align: right;
+
+  color: #666;
+
+  font-size: 12px;
+
+  margin-top: 6px;
+}
+
+
+/* =========================
+   STEP BUTTONS
+========================= */
+
+.step-buttons {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 35px;
+}
+
+.step-buttons button {
+  flex: 1;
+}
+
+.secondary-button {
+  border: 1px solid var(--border);
+
+  color: white;
+
+  background: var(--card);
+
+  border-radius: 14px;
+
+  padding: 15px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload-box {
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+
+  border-radius: 18px;
+
+  background: var(--card);
+
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.upload-box:hover {
+  border-color: var(--accent);
+
+  background: var(--card-2);
+}
+
+.upload-icon {
+  font-size: 28px;
+
+  color: var(--accent);
+}
+
+.upload-box small {
+  color: #777;
+}
+
+.small-upload {
+  min-height: 110px;
+}
+
+.photo-preview {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.preview-photo {
+  position: relative;
+
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  background: #151515;
+}
+
+.preview-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.preview-number {
+  position: absolute;
+
+  top: 6px;
+  left: 6px;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  border-radius: 50%;
+
+  font-size: 11px;
+}
+
+.puzzle-upload {
+  margin-top: 30px;
+}
+
+.puzzle-upload h3 {
+  margin-bottom: 8px;
+}
+
+.puzzle-upload p {
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  margin-bottom: 15px;
+}
+
+.single-preview {
+  margin-top: 12px;
+}
+
+.single-preview img {
+  width: 120px;
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+}
+
+
+/* =========================
+   MÚSICA
+========================= */
+
+.or-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #555;
+
+  margin: 22px 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+
+  flex: 1;
+
+  height: 1px;
+
+  background: var(--border);
+}
+
+.file-name {
+  color: var(--accent-2);
+
+  font-size: 13px;
+
+  margin-top: 10px;
+}
+
+
+/* =========================
+   TEMAS
+========================= */
+
+.theme-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 9px;
+}
+
+.theme-option {
+  min-height: 85px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: var(--card);
+
+  color: white;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  transition: 0.2s;
+}
+
+.theme-option span {
+  font-size: 11px;
+
+  color: var(--muted);
+}
+
+.theme-option.selected {
+  border-color: var(--accent);
+
+  background:
+    rgba(255, 23, 79, 0.1);
+
+  box-shadow:
+    0 0 0 2px rgba(255, 23, 79, 0.08);
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-screen {
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 23, 79, 0.12),
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+.final-header {
+  width: min(94%, 1100px);
+
+  margin: auto;
+
+  padding: 20px 0;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.mini-logo {
+  font-weight: 800;
+
+  font-size: 18px;
+}
+
+.header-actions {
+  display: flex;
+
+  gap: 8px;
+}
+
+.header-actions button {
+  border: 1px solid var(--border);
+
+  color: white;
+
+  background: var(--card);
+
+  border-radius: 10px;
+
+  padding: 10px 13px;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   LOVE PAGE
+========================= */
+
+.love-page {
+  width: min(94%, 850px);
+
+  margin: auto;
+}
+
+.love-hero {
+  text-align: center;
+
+  padding: 80px 0 65px;
+
+  position: relative;
+}
+
+.floating-heart {
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 25px;
+
+  color: white;
+
+  font-size: 35px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  border-radius: 28px;
+
+  box-shadow:
+    0 20px 70px var(--glow);
+
+  animation: pulseHeart 2s infinite;
+}
+
+@keyframes pulseHeart {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.tiny-label,
+.section-label {
+  color: var(--accent-2);
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+.love-hero h1 {
+  font-size: clamp(38px, 8vw, 72px);
+
+  letter-spacing: -3px;
+
+  margin: 12px 0;
+}
+
+.nickname {
+  color: var(--muted);
+
+  font-size: 17px;
+}
+
+.hero-line {
+  width: 70px;
+
+  height: 3px;
+
+  margin: 25px auto 0;
+
+  border-radius: 99px;
+
+  background: var(--accent);
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.counter-card,
+.message-card,
+.music-card,
+.surprise-card {
+  border: 1px solid var(--border);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  border-radius: var(--radius);
+
+  padding: 30px;
+
+  margin-bottom: 22px;
+}
+
+.counter-card {
+  text-align: center;
+}
+
+.counter-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  margin-top: 25px;
+}
+
+.counter-item {
+  border-right: 1px solid var(--border);
+}
+
+.counter-item:last-child {
+  border-right: 0;
+}
+
+.counter-item strong {
+  display: block;
+
+  font-size: clamp(28px, 6vw, 42px);
+}
+
+.counter-item span {
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.message-card h2 {
+  font-size: 27px;
+
+  margin: 15px 0;
+}
+
+.message-card > p:not(.section-label) {
+  color: #d0d0d0;
+
+  line-height: 1.8;
+
+  white-space: pre-wrap;
+}
+
+.signature {
+  color: var(--accent-2);
+
+  margin-top: 25px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   SEÇÕES
+========================= */
+
+.content-section {
+  margin: 50px 0;
+}
+
+.section-heading {
+  display: flex;
+
+  gap: 15px;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.section-heading > span {
+  font-size: 30px;
+}
+
+.section-heading h2 {
+  font-size: 26px;
+
+  margin-top: 4px;
+}
+
+.section-description {
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   GALERIA
+========================= */
+
+.gallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 12px;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  border-radius: 16px;
+
+  background: var(--card);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.4s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+
+/* =========================
+   PUZZLE
+========================= */
+
+.puzzle {
+  width: min(100%, 430px);
+
+  aspect-ratio: 1;
+
+  margin: 20px auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 4px;
+
+  background: #000;
+
+  padding: 4px;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+}
+
+.puzzle-piece {
+  border: 0;
+
+  background-repeat: no-repeat;
+
+  background-size: 300% 300%;
+
+  cursor: pointer;
+
+  transition:
+    filter 0.15s,
+    transform 0.15s;
+}
+
+.puzzle-piece.selected {
+  filter:
+    brightness(1.4)
+    saturate(1.3);
+
+  outline: 3px solid var(--accent);
+
+  z-index: 2;
+}
+
+.puzzle-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.puzzle-buttons button {
+  border: 1px solid var(--border);
+
+  color: white;
+
+  background: var(--card);
+
+  border-radius: 10px;
+
+  padding: 10px 15px;
+}
+
+.puzzle-status {
+  text-align: center;
+
+  min-height: 24px;
+
+  margin-top: 12px;
+
+  color: var(--accent-2);
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   MÚSICA FINAL
+========================= */
+
+.music-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 17px;
+}
+
+.music-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 23, 79, 0.12);
+
+  font-size: 24px;
+}
+
+.music-info {
+  flex: 1;
+}
+
+.music-info h3 {
+  margin: 5px 0;
+
+  font-size: 18px;
+}
+
+.music-info p:last-child {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.music-play {
+  width: 48px;
+  height: 48px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  color: white;
+
+  font-weight: 900;
+}
+
+
+/* =========================
+   SURPRESA
+========================= */
+
+.surprise-section {
+  margin: 60px 0;
+}
+
+.surprise-card {
+  text-align: center;
+
+  padding: 45px 25px;
+}
+
+.surprise-icon {
+  font-size: 45px;
+
+  margin-bottom: 15px;
+}
+
+.surprise-card h2 {
+  font-size: 30px;
+
+  margin: 12px 0;
+}
+
+.surprise-card > p:not(.section-label) {
+  color: var(--muted);
+
+  margin-bottom: 25px;
+}
+
+.surprise-button {
+  border: 0;
+
+  color: white;
+
+  font-weight: 800;
+
+  padding: 14px 22px;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+}
+
+.surprise-message {
+  margin: 25px auto 0;
+
+  max-width: 600px;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 23, 79, 0.08);
+
+  border: 1px solid rgba(255, 23, 79, 0.2);
+
+  color: #eee;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+
+  animation: fadeIn 0.4s;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  text-align: center;
+
+  color: #555;
+
+  padding: 20px 0 50px;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0, 0, 0, 0.75);
+
+  backdrop-filter: blur(8px);
+}
+
+.modal-box {
+  position: relative;
+
+  width: min(100%, 550px);
+
+  padding: 30px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 22px;
+
+  background: #111;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+  position: absolute;
+
+  top: 12px;
+  right: 15px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #aaa;
+
+  font-size: 28px;
+}
+
+.modal-icon {
+  font-size: 40px;
+
+  margin-bottom: 15px;
+}
+
+.modal-box h2 {
+  margin-bottom: 10px;
+}
+
+.modal-box > p {
+  color: var(--muted);
+
+  line-height: 1.6;
+
+  font-size: 14px;
+}
+
+.share-input {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+.share-input input {
+  flex: 1;
+
+  min-width: 0;
+
+  border: 1px solid var(--border);
+
+  background: var(--card);
+
+  color: white;
+
+  border-radius: 10px;
+
+  padding: 12px;
+}
+
+.share-input button {
+  border: 0;
+
+  background: var(--accent);
+
+  color: white;
+
+  border-radius: 10px;
+
+  padding: 0 17px;
+
+  font-weight: 700;
+}
+
+.share-warning {
+  margin-top: 18px;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+  position: fixed;
+
+  z-index: 200;
+
+  left: 50%;
+  bottom: 25px;
+
+  transform:
+    translate(-50%, 30px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  padding: 13px 18px;
+
+  border-radius: 12px;
+
+  background: #222;
+
+  border: 1px solid var(--border);
+
+  color: white;
+
+  font-size: 13px;
+
+  transition: 0.3s;
+}
+
+.toast.show {
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+}
+
+
+/* =========================
+   TEMAS
+========================= */
+
+body.theme-red {
+  --accent: #ff174f;
+  --accent-2: #ff4d73;
+  --glow: rgba(255, 23, 79, 0.35);
+}
+
+body.theme-pink {
+  --accent: #ff3d9a;
+  --accent-2: #ff76b8;
+  --glow: rgba(255, 61, 154, 0.35);
+}
+
+body.theme-purple {
+  --accent: #9c5cff;
+  --accent-2: #c18cff;
+  --glow: rgba(156, 92, 255, 0.35);
+}
+
+body.theme-blue {
+  --accent: #2997ff;
+  --accent-2: #67b5ff;
+  --glow: rgba(41, 151, 255, 0.35);
+}
+
+body.theme-gold {
+  --accent: #f5b83d;
+  --accent-2: #ffd66b;
+  --glow: rgba(245, 184, 61, 0.35);
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 650px) {
+
+  .creator-step h2 {
+    font-size: 25px;
+  }
+
+  .theme-grid {
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+  .counter-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 20px;
+  }
+
+  .counter-item {
+    border-right: 0;
+  }
+
+  .counter-item:nth-child(1),
+  .counter-item:nth-child(2) {
+    border-bottom: 1px solid var(--border);
+
+    padding-bottom: 15px;
+  }
+
+  .gallery {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .music-card {
+    flex-wrap: wrap;
+  }
+
+  .music-info {
+    min-width: calc(100% - 75px);
+  }
+
+  .music-play {
+    margin-left: auto;
+  }
+
+  .final-header {
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    flex-direction: column;
+  }
+
+  .header-actions button {
+    padding: 8px 10px;
+  }
+
+  .love-hero {
+    padding-top: 55px;
+  }
+
+  .love-hero h1 {
+    letter-spacing: -2px;
+  }
+
+  .counter-card,
+  .message-card,
+  .music-card,
+  .surprise-card {
+    padding: 23px;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .theme-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .step-buttons {
+    flex-direction: column;
+  }
+
+  .photo-preview {
+    gap: 7px;
+  }
+
+  .share-input {
+    flex-direction: column;
+  }
+
+  .share-input button {
+    padding: 12px;
+  }
+}
